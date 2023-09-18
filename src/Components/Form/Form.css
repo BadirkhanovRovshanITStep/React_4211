@@ -18,3 +18,11 @@ fieldset legend {
 fieldset label {
     margin-right: 15px;
 }
+
+fieldset.invalid {
+    background-color: pink;
+}
+
+fieldset.valid {
+    background-color: limegreen;
+}

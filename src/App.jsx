@@ -13,10 +13,36 @@ export const ThemeContext = createContext(null);
 export const ThemeToggleContext = createContext(null);
 
 function App() {
+  const inputsData = [
+    {
+      label: 'Name:',
+      defaultText: 'Name',
+      regexp: '\\w{3,10}',
+      name: 'name',
+    },
+    {
+      label: 'Surname:',
+      defaultText: 'Surname',
+      regexp: '\\w{3,10}',
+      name: 'surname',
+    },
+    {
+      label: 'Middle name:',
+      defaultText: 'Middle name',
+      regexp: '\\w{3,10}',
+      name: 'middle-name',
+    },
+    {
+      label: 'Middle name:',
+      // defaultText: 'Middle name',
+      regexp: '\\w{3,10}',
+      name: 'middle-name',
+    },
+  ];
 
   return (
     <>
-      <Form></Form>
+      <Form inputsData={inputsData}></Form>
     </>
   );
 }

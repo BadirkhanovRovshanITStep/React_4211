@@ -4,7 +4,7 @@ import FormInputTypeText from './Inputs/FormInputTypeText/FormInputTypeText';
 
 export const FormValidationContext = createContext(null);
 
-function Form() {
+function Form({ inputsData }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -21,37 +21,27 @@ function Form() {
     }, [invalidInputsCount])
 
     return (
-        <FormValidationContext.Provider value={{
-            invalidInputsCount,
-            setInvalidInputsCount
-        }}>
+        <FormValidationContext.Provider value={setInvalidInputsCount}>
             <form onSubmit={handleSubmit}>
-                <fieldset>
+                <fieldset className={invalidInputsCount === 0 ? 'valid' : 'invalid'}>
                     <legend>Full Name</legend>
 
-                    <FormInputTypeText
-                        labelName={'Name:'}
-                        placeholder={'Name'}
-                        pattern={'\\w{3,10}'}
-                        name={'name'}
+                    {
+                        inputsData.map(inputData => {
+                            const isDefaultTextExist = inputData.defaultText;
 
-                    />
+                            if (!isDefaultTextExist) return null;
 
-                    <FormInputTypeText
-                        labelName={'Surname:'}
-                        placeholder={'Surname'}
-                        pattern={'\\w{3,10}'}
-                        name={'surname'}
-                    />
+                            return <FormInputTypeText
+                                labelName={inputData.label}
+                                placeholder={inputData.defaultText}
+                                pattern={inputData.regexp}
+                                name={inputData.name}
+                            />
+                        })
+                    }
 
-                    <FormInputTypeText
-                        labelName={'Middle name:'}
-                        placeholder={'Middle name'}
-                        pattern={'\\w{3,10}'}
-                        name={'middle-name'}
-                    />
-
-                    <button>Submit</button>
+                    <button disabled={invalidInputsCount === 0 ? false : true}>Submit</button>
                 </fieldset>
             </form>
         </FormValidationContext.Provider>

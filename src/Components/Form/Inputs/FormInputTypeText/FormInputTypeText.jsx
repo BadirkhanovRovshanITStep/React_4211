@@ -12,20 +12,20 @@ function FormInputTypeText({
     const [isValid, setIsValid] = useState(true);
     const regexp = new RegExp(`^${pattern}$`, 'i');
 
-    const {invalidInputsCount, setInvalidInputsCount} = useContext(FormValidationContext);
+    const setInvalidInputsCount = useContext(FormValidationContext);
 
     const validateInput = (e) => {
         const value = e.target.value;
 
         const isValidNewState = regexp.test(value);
 
-        setIsValid(isValidNewState);
-
         setInvalidInputsCount( (prevState) => {
-            if (isValid !== isValidNewState) return invalidInputsCount + (isValidNewState === true ? -1 : 1);
+            if (isValid !== isValidNewState) return prevState + (isValidNewState === true ? -1 : 1);
 
             return prevState;
         })
+
+        setIsValid(isValidNewState);
     }
 
     return (
