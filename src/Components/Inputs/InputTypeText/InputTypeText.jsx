@@ -1,10 +1,18 @@
+import { forwardRef } from 'react';
 import './InputTypeText.css';
 
-function InputTypeText({inputHandle}) {
+// function InputTypeText({ inputHandle }) {
 
+//   return (
+//     <input type="text" />
+//   );
+// }
+
+
+const InputTypeText = forwardRef(function InputTypeText({ inputHandle }, ref) {
   return (
-    <input type="text" />
+    <input type="text" ref={ref}/>
   );
-}
+})
 
 export default InputTypeText;
