@@ -16,6 +16,7 @@ export const ThemeToggleContext = createContext(null);
 
 function App() {
   const input = useRef(null);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     console.log('Something is changed');
@@ -24,7 +25,13 @@ function App() {
   return (
     <>
       {/* <input type="text" ref={input}/> */}
-      <InputTypeText ref={input} />
+      <ThemeContext.Provider value={{
+        count: count,
+        setCount: setCount,
+      }}>
+        <InputTypeText ref={input} />
+      </ThemeContext.Provider>
+      
       <button onClick={() => console.log(input.current.value)}>Log input value</button>
     </>
   );
